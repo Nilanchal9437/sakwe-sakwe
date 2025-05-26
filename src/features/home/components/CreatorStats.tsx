@@ -1,5 +1,4 @@
-import Image from "next/image";
-import "keen-slider/keen-slider.min.css";
+import Image from "next/image"; 
 import { useKeenSlider } from "keen-slider/react";
 import { useEffect } from "react";
 
