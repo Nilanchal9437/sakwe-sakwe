@@ -1,7 +1,6 @@
 import "./globals.css";
-import "keen-slider/keen-slider.min.css"; 
 import type { Metadata } from "next";
-import Providers from "@/providers";
+import Providers from "@/providers"; 
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.5/keen-slider.min.css"
+        />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>
