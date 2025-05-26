@@ -94,7 +94,7 @@ export default function CreatorStats() {
       {/* Stats and carousel */}
       <div>
         <div className="flex flex-col md:flex-row gap-6 lg:items-end lg:justify-between  mb-10">
-          <h3 className="text-3xl md:text-4xl font-bold text-center lg:text-left text-black mb-8">
+          <h3 className="text-3xl md:text-4xl font-bold text-center lg:text-left text-black mb-8 mt-8 md:mt-0">
             <span className="text-blue-500">17.000</span> creators entered
             Sakwe-Sakwe
             <br />
