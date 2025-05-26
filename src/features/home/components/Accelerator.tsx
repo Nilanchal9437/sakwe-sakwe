@@ -4,13 +4,14 @@ export default function Accelerator() {
   return (
     <div className="relative bg-[#FFFAE9] rounded-2xl p-6 md:p-12 w-full">
       {/* Rocket image top-right */}
-      <div className="absolute -top-22 -right-0 md:-top-12 md:-right-12 lg:-top-14 lg:-right-14 xl:-top-20 xl:-right-20">
+      <div className="absolute -top-15 right-0 md:-top-12 md:-right-12 lg:-top-14 lg:-right-14 xl:-top-20 xl:-right-20">
         <Image
           src="/home/rocket.png"
           alt="rocket"
           width={220}
           height={220}
           objectFit='contain'
+          className='h-[120px] w-[120px] md:h-[220px] md:w-[220px]'
         />
       </div>
       <div className="flex flex-col md:flex-row gap-8 items-start">
