@@ -1,5 +1,6 @@
 import "./globals.css";
 import "keen-slider/keen-slider.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import Providers from "@/providers";
 
