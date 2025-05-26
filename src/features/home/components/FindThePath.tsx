@@ -8,7 +8,7 @@ export default function FindThePath() {
         <h2 className="text-3xl md:text-5xl font-bold text-black my-3 md:mb-6">
           Let's find a path
         </h2>
-        <p className="text-lg md:text-xl text-black mb-4 md:mb-10 max-w-sm md:max-w-xl mx-auto">
+        <p className="text-lg md:text-xl text-black mb-4 md:mb-10 max-w-sm md:max-w-xl mx-auto px-2">
           Need help figuring out what to start with? We invite children and
           parents to a trial class where our tutor will help choose the best
           path.

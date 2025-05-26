@@ -11,7 +11,7 @@ export default function LearningOptions() {
             with <span className="text-blue-500">pals</span>
           </h2>
         </div>
-        <div className="text-gray-600 text-lg font-medium w-[400px] leading-snug mt-2 lg:mt-0">
+        <div className="text-gray-600 text-lg font-medium md:w-[400px] leading-snug mt-2 lg:mt-0">
           At Sakwe-Sakwe, kids learn digital skills and practice creating real
           projects in courses, unleashing their inner artists and entrepreneurs
           in the process.
@@ -20,19 +20,19 @@ export default function LearningOptions() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Group classes card */}
         <div className="bg-[#F4F7FF] rounded-2xl p-8 flex flex-col relative min-h-[420px]">
-          <div className="flex flex-row items-start justify-between">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-y-5">
             <div>
               <span className="text-blue-500 text-sm font-medium mb-2">
                 Group classes
               </span>
-              <h3 className="text-2xl lg:text-2xl font-bold text-black max-w-[60%]">
+              <h3 className="text-2xl lg:text-2xl font-bold text-black md:max-w-[60%]">
                 Not just a class, but a team of like-minded people
               </h3>
             </div>
             <img
               src="/home/chat.png"
               alt="Group Emoji"
-              className="w-30 h-30 object-contain ml-2"
+              className="w-30 h-30 object-contain mx-auto md:ml-2"
             />
           </div>
           <hr className="my-6 border-blue-100" />
@@ -64,7 +64,7 @@ export default function LearningOptions() {
               <span>Future friends with similar interests.</span>
             </div>
           </div>
-          <div className="flex items-center mt-auto pt-2">
+          <div className="flex flex-col md:flex-row items-center mt-auto pt-2 gap-y-2">
             <button className="bg-blue-500 text-white text-lg font-medium rounded-xl px-8 py-3 hover:bg-blue-600 transition-colors">
               Learn more
             </button>
@@ -75,19 +75,19 @@ export default function LearningOptions() {
         </div>
         {/* Individual lessons card */}
         <div className="bg-[#F4F7FF] rounded-2xl p-8 flex flex-col relative min-h-[420px]">
-          <div className="flex flex-row items-start justify-between">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-y-5">
             <div>
               <span className="text-blue-500 text-sm font-medium mb-2">
                 Individual lessons
               </span>
-              <h3 className="text-2xl lg:text-2xl font-bold text-black max-w-[60%]">
+              <h3 className="text-2xl lg:text-2xl font-bold text-black md:max-w-[60%]">
                 Go at the child's pace, with undivided attention
               </h3>
             </div>
             <img
               src="/home/hand.png"
               alt="Individual Emoji"
-              className="w-30 h-30 object-contain ml-2"
+              className="w-30 h-30 object-contain mx-auto md:ml-2"
             />
           </div>
           <hr className="my-6 border-blue-100" />
@@ -119,7 +119,7 @@ export default function LearningOptions() {
               <span>Not just a tutors, but a partners.</span>
             </div>
           </div>
-          <div className="flex items-center mt-auto pt-2">
+          <div className="flex flex-col md:flex-row items-center mt-auto pt-2 gap-y-2">
             <button className="bg-blue-500 text-white text-lg font-medium rounded-xl px-8 py-3 hover:bg-blue-600 transition-colors">
               Learn more
             </button>

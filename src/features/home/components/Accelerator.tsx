@@ -25,7 +25,7 @@ export default function Accelerator() {
           </button>
         </div>
         {/* Right: Cards */}
-        <div className="flex-1 flex flex-row gap-8 justify-center w-full">
+        <div className="flex-1 flex flex-col md:flex-row gap-8 justify-center w-full">
           {[1, 2].map((_, i) => (
             <div
               key={i}
