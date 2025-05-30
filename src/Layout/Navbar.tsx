@@ -57,7 +57,7 @@ const Navbar = () => {
               <span className="italic text-gray-500">@ipsum</span>
             </div>
             {/* Desktop Nav */}
-            <ul className="hidden md:flex gap-8 text-gray-800 font-medium text-lg">
+            <ul className="hidden lg:flex gap-8 text-gray-800 font-medium text-lg">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="hover:text-black transition">
@@ -67,14 +67,14 @@ const Navbar = () => {
               ))}
             </ul>
             <button
-              className="hidden md:block bg-white text-black font-medium rounded-xl px-8 py-3 shadow transition hover:bg-gray-100 border border-gray-200"
+              className="hidden lg:block bg-white text-black font-medium rounded-xl px-8 py-3 shadow transition hover:bg-gray-100 border border-gray-200"
               style={{ minWidth: 120 }}
             >
               Log in
             </button>
             {/* Hamburger for mobile */}
             <button
-              className="md:hidden ml-auto flex items-center justify-center p-2 rounded focus:outline-none"
+              className="lg:hidden ml-auto flex items-center justify-center p-2 rounded focus:outline-none"
               onClick={() => setMenuOpen((open) => !open)}
               aria-label="Toggle menu"
             >
@@ -105,7 +105,7 @@ const Navbar = () => {
           </nav>
           {/* Mobile menu dropdown */}
           {menuOpen && (
-            <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-b-xl flex flex-col items-center py-4 md:hidden animate-fade-in z-40">
+            <div className="absolute top-full left-0 w-full bg-white shadow-lg rounded-b-xl flex flex-col items-center py-4 lg:hidden animate-fade-in z-40">
               <ul className="flex flex-col gap-4 w-full items-center">
                 {navLinks.map((link) => (
                   <li key={link.label} className="w-full text-center">

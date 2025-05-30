@@ -11,6 +11,7 @@ import LearningOptions from "@/features/home/components/LearningOptions";
 import CreatorStats from "@/features/home/components/CreatorStats";
 import FindThePath from "@/features/home/components/FindThePath";
 import Game from '@/features/home/components/Game';
+import Project from "@/features/home/components/Project";
 
 // import getDecks from "@/features/home/apis/getDecks";
 // import { IDeck } from "@/features/home/types";
@@ -34,6 +35,7 @@ export default function Home() {
         <CreatorStats />
         <Game />
         <FindThePath />
+        <Project />
         <Accelerator />
         <LearningOptions />
         <Testimonials />
