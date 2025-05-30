@@ -10,6 +10,7 @@ import Testimonials from "@/features/home/components/Testimonials";
 import LearningOptions from "@/features/home/components/LearningOptions";
 import CreatorStats from "@/features/home/components/CreatorStats";
 import FindThePath from "@/features/home/components/FindThePath";
+import Game from '@/features/home/components/Game';
 
 // import getDecks from "@/features/home/apis/getDecks";
 // import { IDeck } from "@/features/home/types";
@@ -31,6 +32,7 @@ export default function Home() {
       <Hero />
       <Container className="flex flex-col gap-y-20 my-20">
         <CreatorStats />
+        <Game />
         <FindThePath />
         <Accelerator />
         <LearningOptions />
