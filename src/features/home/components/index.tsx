@@ -13,20 +13,7 @@ import FindThePath from "@/features/home/components/FindThePath";
 import Game from '@/features/home/components/Game';
 import Project from "@/features/home/components/Project";
 
-// import getDecks from "@/features/home/apis/getDecks";
-// import { IDeck } from "@/features/home/types";
-
 export default function Home() {
-  // const [decks, setDecks] = React.useState<IDeck[]>([]);
-
-  // const getDecksList = async () => {
-  //   const response = await getDecks();
-  //   setDecks(response);
-  // };
-
-  // React.useEffect(() => {
-  //   getDecksList();
-  // }, []);
 
   return (
     <>

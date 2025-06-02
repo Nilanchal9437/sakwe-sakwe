@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function FindThePath() {
   return (
     <section className="py-4 md:py-16 rounded-2xl bg-[url('/home/findpath.jpg')] bg-center object-contain md:object-cover bg-no-repeat bg-cover lg:min-h-[400px]">

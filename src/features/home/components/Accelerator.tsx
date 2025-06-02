@@ -31,7 +31,7 @@ export default function Accelerator() {
             <div
               key={i}
               className="flex flex-col justify-between bg-lime-200 rounded-2xl p-6 w-full min-h-full shadow-md"
-              style={{ backgroundColor: '#D6FF6B' }}
+              style={{ backgroundColor: '#89e894' }}
             >
               {/* Image placeholder */}
               <div className="bg-gray-300 rounded-xl w-full h-36 mb-6" />
