@@ -1,0 +1,247 @@
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import games from "@/constants/games";
+import Modal from "@/components/Modal";
+import React, { useState, useEffect } from "react";
+import { useKeenSlider, TrackDetails } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
+
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]; // Copy to avoid mutating the original
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+type Question = {
+  question: string;
+  answer: string;
+  answerSeen: boolean;
+  cardSeen: boolean;
+  sessionTime: string;
+};
+
+function Game() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [game, setGame] = React.useState<Question[]>([]);
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
+  const param = useSearchParams();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [details, setDetails] = React.useState<TrackDetails | null>(null);
+  const [totalSessionTime, setTotalSessionTime] = useState<number>(0);
+  const [cardDuration, setCardDuration] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTotalSessionTime((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCardDuration((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (totalSeconds: number): string => {
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  };
+
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    initial: 0,
+    slides: { perView: 1, spacing: 0 },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel);
+      setFlippedIndex(null);
+    },
+    detailsChanged(s) {
+      setDetails(s.track.details);
+    },
+    mode: "snap",
+    drag: true,
+    rubberband: true,
+    defaultAnimation: {
+      duration: 500,
+    },
+  });
+
+  useEffect(() => {
+    if (game.length > 0) {
+      game[currentSlide - 1].sessionTime = formatTime(cardDuration); 
+      if (currentSlide > 0) {
+        if (game[currentSlide].cardSeen === false) {
+          game[currentSlide].cardSeen = true;
+        }
+      }
+      setGame([...game]);
+      setCardDuration(0);
+    }
+  }, [currentSlide]);
+
+  useEffect(() => {
+    const id = param.get("id");
+    if (id) {
+      const filtergame = games.find((item) => item.id === parseInt(id));
+      if (
+        filtergame &&
+        Array.isArray(filtergame.questions) &&
+        filtergame.questions?.length > 0
+      ) {
+        const randomizedArray = shuffleArray(filtergame.questions);
+        const updatedArray: Question[] = [];
+        randomizedArray.map((item, index) => {
+          if (index === 0) {
+            updatedArray.push({
+              ...item,
+              answerSeen: false,
+              cardSeen: true,
+              sessionTime: "",
+            });
+          } else {
+            updatedArray.push({
+              ...item,
+              answerSeen: false,
+              cardSeen: false,
+              sessionTime: "",
+            });
+          }
+        });
+        setGame(updatedArray);
+        setLoading(false);
+      } else {
+        router.back();
+      }
+    }
+  }, [param]);
+
+  const handleFlip = (index: number) => {
+    setFlippedIndex(flippedIndex === index ? null : index);
+    if (game[index].answerSeen === false) {
+      game[index].answerSeen = true;
+      setGame([...game]);
+    }
+  };
+
+  function scaleStyle(idx: number) {
+    if (!details) return {};
+    const slide = details.slides[idx];
+    const scale_size = 0.7;
+    const scale = 1 - (scale_size - scale_size * slide.portion);
+    return {
+      transform: `scale(${scale})`,
+      WebkitTransform: `scale(${scale})`,
+    };
+  }
+
+  return (
+    <Modal
+      className="w-full h-full bg-cover bg-[#F0E6FF] bg-[url('/game/game-bg.svg')] bg-center bg-no-repeat lg:bg-contain lg:object-cover lg:max-h-[90vh] lg:w-fit lg:h-fit lg:max-w-[90vw] lg:p-6"
+      hideBtn
+      title=""
+      secondaryText=""
+      open={true}
+      onClose={() => router.back()}
+      cancelButtonText="Cancel"
+      centerText={
+        <div className="relative">
+          <div className="absolute left-0 right-0 bg-white rounded-xl w-20 h-10 mx-auto">
+            <h1 className="text-center text-xl font-semibold py-1">
+              {formatTime(totalSessionTime)}
+            </h1>
+          </div>
+        </div>
+      }
+      content={
+        <section className="flex flex-col items-center justify-items-center justify-center lg:p-4 h-full">
+          <div className="w-full h-full lg:w-[58vw] lg:h-[450px] flex flex-col justify-center items-center">
+            <div className="relative w-[80vw] h-[450px] lg:w-[40vw] lg:h-[360px]">
+              {!loading ? (
+                <div ref={sliderRef} className="keen-slider h-full">
+                  {game?.map((item, i: number) => (
+                    <div key={i} className="keen-slider__slide">
+                      <div
+                        style={scaleStyle(i)}
+                        className="flex items-center justify-center px-12 rounded-xl w-full h-full bg-white"
+                      >
+                        <div
+                          className="relative w-full cursor-pointer"
+                          onClick={() => handleFlip(i)}
+                          style={{
+                            transformStyle: "preserve-3d",
+                            transition:
+                              "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                            transform:
+                              flippedIndex === i
+                                ? "rotateY(180deg)"
+                                : "rotateY(0deg)",
+                          }}
+                        >
+                          <div
+                            className="absolute inset-0 flex items-center justify-center px-8"
+                            style={{ backfaceVisibility: "hidden" }}
+                          >
+                            <div className="w-full max-w-[95%] overflow-hidden">
+                              <h2 className="text-2xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
+                                {item.question}
+                              </h2>
+                            </div>
+                          </div>
+                          <div
+                            className="absolute inset-0 flex items-center justify-center px-8"
+                            style={{
+                              backfaceVisibility: "hidden",
+                              transform: "rotateY(180deg)",
+                            }}
+                          >
+                            <div className="w-full max-w-[95%] overflow-hidden">
+                              <h2 className="text-2xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
+                                {item.answer}
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  !loading && instanceRef?.current?.prev();
+                }}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-red-600 disabled:opacity-50 z-10 shadow-lg"
+                disabled={currentSlide === 0}
+              >
+                ←
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  !loading && instanceRef?.current?.next();
+                }}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-teal-600 disabled:opacity-50 z-10 shadow-lg"
+                disabled={currentSlide === (game?.length || 0) - 1}
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </section>
+      }
+      onNext={() => {}}
+      nextButtonText="Add"
+    />
+  );
+}
+
+export default Game;

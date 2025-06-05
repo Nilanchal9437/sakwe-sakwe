@@ -1,5 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import ModalType from "@/components/Modal/types";
+import cn from "classnames";
 
 function Modal({
   open,
@@ -13,20 +14,24 @@ function Modal({
   load,
   centerText,
   hideBtn,
+  className,
 }: ModalType) {
   if (!open) return null; // Hide modal when not open
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div
-        className={`bg-gray-100 rounded-lg shadow-lg max-h-[90vh] w-full lg:max-w-[90vw] p-6`}
+        className={cn(`rounded-lg shadow-lg`, {
+          [`${className}`]: className !== undefined,
+          "bg-gray-100 max-h-[90vh] w-fit h-fit max-w-[90vw] p-6": className === undefined,
+        })}
       >
         {/* Header */}
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700 p-6 lg:p-0"
           >
             <IoMdClose className="w-5 h-5" />
           </button>
@@ -38,7 +43,7 @@ function Modal({
           <p className="text-sm text-gray-400 mt-2">{secondaryText}</p>
         )}
         {hideBtn ? (
-          <div className="mt-4 overflow-y-auto max-h-[70vh]">{content}</div>
+          <div className="mt-4 overflow-y-auto max-h-[70vh] h-full">{content}</div>
         ) : (
           <div className="mt-4 overflow-y-auto max-h-[50vh]">{content}</div>
         )}

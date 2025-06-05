@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+.fancy-in-right {
+    animation: fancyInRight 0.7s ease-out forwards;
+  }
+  .fancy-out-left {
+    animation: fancyOutLeft 0.7s ease-in forwards;
+  }
+  .fancy-in-left {
+    animation: fancyInLeft 0.7s ease-out forwards;
+  }
+  .fancy-out-right {
+    animation: fancyOutRight 0.7s ease-in forwards;
+  }
+  
+  @keyframes fancyInRight {
+    0% {
+      transform: translateX(150%) rotateZ(30deg) skewY(-5deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) rotateZ(0deg) skewY(0deg);
+      opacity: 1;
+    }
+  }
+  @keyframes fancyOutLeft {
+    0% {
+      transform: translateX(0) rotateZ(0deg) skewY(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-150%) rotateZ(-30deg) skewY(5deg);
+      opacity: 0;
+    }
+  }
+  @keyframes fancyInLeft {
+    0% {
+      transform: translateX(-150%) rotateZ(-30deg) skewY(5deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) rotateZ(0deg) skewY(0deg);
+      opacity: 1;
+    }
+  }
+  @keyframes fancyOutRight {
+    0% {
+      transform: translateX(0) rotateZ(0deg) skewY(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(150%) rotateZ(30deg) skewY(-5deg);
+      opacity: 0;
+    }
+  }

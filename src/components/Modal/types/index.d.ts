@@ -10,6 +10,7 @@ interface ModalType {
   load?: boolean;
   centerText?: React.ReactNode;
   hideBtn?: boolean;
+  className?: string;
 }
 
 export default ModalType;
