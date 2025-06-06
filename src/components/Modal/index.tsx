@@ -21,9 +21,9 @@ function Modal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div
-        className={cn(`rounded-lg shadow-lg overflow-y-hidden`, {
+        className={cn(`md:rounded-lg shadow-lg overflow-y-hidden`, {
           [`${className}`]: className !== undefined,
-          "bg-gray-100 max-h-[90vh] w-fit h-fit max-w-[90vw] xl:max-w-[1064px] 2xl:max-w-[1264px] p-6":
+          "w-full h-full bg-gray-100 md:max-h-[90vh] md:max-w-[90vw] xl:max-w-[1064px] 2xl:max-w-[1264px] p-6":
             className === undefined,
         })}
       >
