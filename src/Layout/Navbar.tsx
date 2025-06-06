@@ -4,13 +4,13 @@ import React from "react";
 import Container from "@/components/Container";
 import Link from "next/link";
 
-const navLinks = [
-  { label: "About", href: "#" },
-  { label: "Methods", href: "#" },
-  { label: "Courses", href: "#" },
-  { label: "Pricing", href: "#" },
-  { label: "FAQ", href: "#" },
-  { label: "Accelerator", href: "#" },
+const navLinks: any[] = [
+  // { label: "About", href: "#" },
+  // { label: "Methods", href: "#" },
+  // { label: "Courses", href: "#" },
+  // { label: "Pricing", href: "#" },
+  // { label: "FAQ", href: "#" },
+  // { label: "Accelerator", href: "#" },
 ];
 
 const Navbar = () => {

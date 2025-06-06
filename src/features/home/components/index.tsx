@@ -21,11 +21,11 @@ export default function Home() {
       <Container className="flex flex-col gap-y-20 my-20">
         <CreatorStats />
         <Game />
-        <FindThePath />
-        <Project />
+        {/* <FindThePath /> */}
+        {/* <Project /> */}
         <Accelerator />
         <LearningOptions />
-        <Testimonials />
+        {/* <Testimonials /> */}
       </Container>
       <ContactForm />
     </>

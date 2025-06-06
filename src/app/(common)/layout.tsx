@@ -13,7 +13,7 @@ export default function CommonLayout({
       <Navbar />
       {children}
       {modal}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

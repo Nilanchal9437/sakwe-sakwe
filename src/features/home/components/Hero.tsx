@@ -1,24 +1,24 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import Container from "@/components/Container";
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const router = useRouter();
   return (
-    <section className="bg-[url('/home/banner-background.jpg')] bg-center object-cover bg-no-repeat bg-cover">
-      <Container className="relative overflow-hidden flex flex-col items-center justify-center md:min-h-[100vh] pb-6 lg:pb-0">
-        <Image
+    <section className="bg-[#89e894]">
+      <Container className="relative overflow-hidden flex flex-col items-center justify-center py-16">
+        {/* <Image
           src="/home/Gemma.png"
           alt="gemaa"
           height={250}
           width={250}
           objectFit="contain"
           className="absolute left-0 top-20 hidden md:block"
-        />
+        /> */}
 
-        <Image
+        {/* <Image
           src="/home/zero.png"
           alt="zero"
           height={80}
@@ -41,7 +41,7 @@ const Hero = () => {
           width={250}
           objectFit="contain"
           className="absolute right-8 bottom-24 hidden md:block"
-        />
+        /> */}
 
         {/* Main Content */}
         <div className="flex flex-col items-center justify-center z-20 mt-20">
@@ -78,14 +78,14 @@ const Hero = () => {
         </div>
       </Container>
       {/* Decorative pencils (right side) */}
-      <Image
+      {/* <Image
         src="/home/Group.png"
         alt="close"
         height={80}
         width={80}
         objectFit="contain"
         className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2"
-      />
+      /> */}
     </section>
   );
 };

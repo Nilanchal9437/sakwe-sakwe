@@ -46,9 +46,9 @@ export default function CreatorStats() {
 
   return (
     <section className="w-full px-2 lg:px-0">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 mb-4">
         {/* Left: Art and pattern */}
-        <div className="flex w-full">
+        {/* <div className="flex w-full">
           <div
             ref={sliderRef}
             className="keen-slider w-full grid grid-cols-1 md:grid-cols-2"
@@ -74,7 +74,7 @@ export default function CreatorStats() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         {/* Center: Heading and description */}
         <div className="flex-1 justify-end mt-2">
           <h2 className="text-4xl md:text-5xl font-bold text-left text-[#232323] mb-2">
@@ -83,7 +83,7 @@ export default function CreatorStats() {
             <span className="text-[#232323]"> and </span>
             <span className="text-blue-500">grow</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mt-4">
+          <p className="text-gray-400 text-lg mt-4">
             We help channel the natural creativity of childhood into real games,
             websites and more – all in a safe and fun environment for kids of
             any age.

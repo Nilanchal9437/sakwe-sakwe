@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 export default function LearningOptions() {
   return (
     <section className="w-full px-2 lg:px-0 py-16">

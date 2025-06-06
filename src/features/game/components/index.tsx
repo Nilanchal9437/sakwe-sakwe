@@ -33,6 +33,7 @@ function Game() {
   const [details, setDetails] = React.useState<TrackDetails | null>(null);
   const [totalSessionTime, setTotalSessionTime] = useState<number>(0);
   const [cardDuration, setCardDuration] = useState<number>(0);
+  const [direction, setDirection] = useState<"left" | "right" | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,6 +61,14 @@ function Game() {
     initial: 0,
     slides: { perView: 1, spacing: 0 },
     slideChanged(slider) {
+      // Detect direction
+      if (slider.track.details.rel > currentSlide) {
+        setDirection("right");
+      } else if (slider.track.details.rel < currentSlide) {
+        setDirection("left");
+      } else {
+        setDirection(null);
+      }
       setCurrentSlide(slider.track.details.rel);
       setFlippedIndex(null);
     },
@@ -76,16 +85,21 @@ function Game() {
 
   useEffect(() => {
     if (game.length > 0) {
-      game[currentSlide - 1].sessionTime = formatTime(cardDuration); 
+      if (direction === "right") {
+        game[currentSlide - 1].sessionTime = formatTime(cardDuration);
+        setCardDuration(0);
+      } else if (direction === "left") {
+        game[currentSlide].sessionTime = formatTime(cardDuration);
+        setCardDuration(0);
+      }
       if (currentSlide > 0) {
         if (game[currentSlide].cardSeen === false) {
           game[currentSlide].cardSeen = true;
         }
       }
       setGame([...game]);
-      setCardDuration(0);
     }
-  }, [currentSlide]);
+  }, [direction]);
 
   useEffect(() => {
     const id = param.get("id");
@@ -118,7 +132,7 @@ function Game() {
         setGame(updatedArray);
         setLoading(false);
       } else {
-        router.back();
+        router.push("/games");
       }
     }
   }, [param]);
@@ -144,7 +158,7 @@ function Game() {
 
   return (
     <Modal
-      className="w-full h-full bg-cover bg-[#F0E6FF] bg-[url('/game/game-bg.svg')] bg-center bg-no-repeat lg:bg-contain lg:object-cover lg:max-h-[90vh] lg:w-fit lg:h-fit lg:max-w-[90vw] lg:p-6"
+      className="w-full h-full bg-[#89e894] md:max-h-[90vh] xl:max-w-[1064px] 2xl:max-w-[1264px] md:w-fit md:h-fit md:max-w-[90vw] md:p-6"
       hideBtn
       title=""
       secondaryText=""
@@ -161,16 +175,16 @@ function Game() {
         </div>
       }
       content={
-        <section className="flex flex-col items-center justify-items-center justify-center lg:p-4 h-full">
-          <div className="w-full h-full lg:w-[58vw] lg:h-[450px] flex flex-col justify-center items-center">
-            <div className="relative w-[80vw] h-[450px] lg:w-[40vw] lg:h-[360px]">
+        <section className="flex flex-col items-center justify-items-center justify-center md:p-4 h-full">
+          <div className="w-full h-full md:w-[58vw] xl:w-[45vw] 2xl:w-[1000px] md:h-[450px] flex flex-col justify-center items-center">
+            <div className="relative w-[80vw] h-[450px] md:w-[40vw] 2xl:w-[800px] md:h-[360px]">
               {!loading ? (
                 <div ref={sliderRef} className="keen-slider h-full">
                   {game?.map((item, i: number) => (
                     <div key={i} className="keen-slider__slide">
                       <div
                         style={scaleStyle(i)}
-                        className="flex items-center justify-center px-12 rounded-xl w-full h-full bg-white"
+                        className="flex items-center justify-center px-10 h-[50vw] sm:h-[45vw] md:px-12 rounded-xl w-full md:h-full bg-white"
                       >
                         <div
                           className="relative w-full cursor-pointer"
@@ -190,7 +204,7 @@ function Game() {
                             style={{ backfaceVisibility: "hidden" }}
                           >
                             <div className="w-full max-w-[95%] overflow-hidden">
-                              <h2 className="text-2xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
+                              <h2 className="md:text-2xl xl:text-3xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
                                 {item.question}
                               </h2>
                             </div>
@@ -203,7 +217,7 @@ function Game() {
                             }}
                           >
                             <div className="w-full max-w-[95%] overflow-hidden">
-                              <h2 className="text-2xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
+                              <h2 className="md:text-2xl xl:text-3xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
                                 {item.answer}
                               </h2>
                             </div>
@@ -219,7 +233,7 @@ function Game() {
                   e.stopPropagation();
                   !loading && instanceRef?.current?.prev();
                 }}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-red-600 disabled:opacity-50 z-10 shadow-lg"
+                className="absolute left-4 top-1/3 md:top-1/2 transform -translate-y-1/2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-red-600 disabled:opacity-50 z-10 shadow-lg"
                 disabled={currentSlide === 0}
               >
                 ←
@@ -229,7 +243,7 @@ function Game() {
                   e.stopPropagation();
                   !loading && instanceRef?.current?.next();
                 }}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-teal-600 disabled:opacity-50 z-10 shadow-lg"
+                className="absolute right-4 top-1/3 md:top-1/2 transform -translate-y-1/2 w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-teal-600 disabled:opacity-50 z-10 shadow-lg"
                 disabled={currentSlide === (game?.length || 0) - 1}
               >
                 →

@@ -23,7 +23,8 @@ function Modal({
       <div
         className={cn(`rounded-lg shadow-lg`, {
           [`${className}`]: className !== undefined,
-          "bg-gray-100 max-h-[90vh] w-fit h-fit max-w-[90vw] p-6": className === undefined,
+          "bg-gray-100 max-h-[90vh] w-fit h-fit max-w-[90vw] xl:max-w-[1064px] 2xl:max-w-[1264px] p-6":
+            className === undefined,
         })}
       >
         {/* Header */}
@@ -43,7 +44,9 @@ function Modal({
           <p className="text-sm text-gray-400 mt-2">{secondaryText}</p>
         )}
         {hideBtn ? (
-          <div className="mt-4 overflow-y-auto max-h-[70vh] h-full">{content}</div>
+          <div className="mt-4 overflow-y-auto max-h-[70vh] h-full">
+            {content}
+          </div>
         ) : (
           <div className="mt-4 overflow-y-auto max-h-[50vh]">{content}</div>
         )}
