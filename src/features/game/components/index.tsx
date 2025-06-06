@@ -184,7 +184,7 @@ function Game() {
                     <div key={i} className="keen-slider__slide">
                       <div
                         style={scaleStyle(i)}
-                        className="flex items-center justify-center px-10 h-[50vw] sm:h-[45vw] md:px-12 rounded-xl w-full md:h-full bg-white"
+                        className="flex items-center justify-center px-10 sm:h-[45vw] md:px-12 rounded-xl w-full h-full bg-white"
                       >
                         <div
                           className="relative w-full cursor-pointer"
@@ -233,7 +233,7 @@ function Game() {
                   e.stopPropagation();
                   !loading && instanceRef?.current?.prev();
                 }}
-                className="absolute left-4 top-1/3 md:top-1/2 transform -translate-y-1/2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-red-600 disabled:opacity-50 z-10 shadow-lg"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-red-600 disabled:opacity-50 z-10 shadow-lg"
                 disabled={currentSlide === 0}
               >
                 ←
@@ -243,7 +243,7 @@ function Game() {
                   e.stopPropagation();
                   !loading && instanceRef?.current?.next();
                 }}
-                className="absolute right-4 top-1/3 md:top-1/2 transform -translate-y-1/2 w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-teal-600 disabled:opacity-50 z-10 shadow-lg"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-teal-500 text-white rounded-full flex items-center justify-center text-2xl hover:bg-teal-600 disabled:opacity-50 z-10 shadow-lg"
                 disabled={currentSlide === (game?.length || 0) - 1}
               >
                 →
