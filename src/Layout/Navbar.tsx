@@ -52,10 +52,10 @@ const Navbar = () => {
       <Container>
         <div ref={navRef}>
           <nav className="mx-auto flex items-center justify-between px-4 py-2 relative">
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <span className="font-bold text-lg text-gray-900">logo</span>
               <span className="italic text-gray-500">@ipsum</span>
-            </div>
+            </div> */}
             {/* Desktop Nav */}
             <ul className="hidden lg:flex gap-8 text-gray-800 font-medium text-lg">
               {navLinks.map((link) => (

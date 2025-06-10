@@ -1,5 +1,5 @@
-import Navbar from "@/Layout/Navbar";
-import Footer from "@/Layout/Footer";
+// import Navbar from "@/Layout/Navbar";
+// import Footer from "@/Layout/Footer";
 
 export default function CommonLayout({
   children,
@@ -10,7 +10,7 @@ export default function CommonLayout({
 }>) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       {children}
       {modal}
       {/* <Footer /> */}

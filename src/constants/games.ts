@@ -2,7 +2,7 @@ const games = [
   {
     id: 1,
     title: "Ibisakuzo",
-    desc: "Guess the country based on the map image! +8 bonus rounds for the true nerds.",
+    desc: "Riddles and wit from the heart of Rwanda",
     icon: "/games/Worldle.png",
     bgColor: "#E0F2FE",
     imageShape: "circle",
@@ -224,7 +224,7 @@ const games = [
   {
     id: 2,
     title: "African Geo Trivia",
-    desc: "Name the countries to travel from the Start to the End.",
+    desc: "Test your brain on Africa’s places, peaks, and borders!",
     icon: "/games/Travle.png",
     bgColor: "#FEF6E7",
     imageShape: "square",

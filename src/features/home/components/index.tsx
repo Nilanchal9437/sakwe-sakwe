@@ -18,16 +18,16 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Container className="flex flex-col gap-y-20 my-20">
-        <CreatorStats />
-        <Game />
+      {/* <Container className="flex flex-col gap-y-20 my-20"> */}
+        {/* <CreatorStats /> */}
+        {/* <Game /> */}
         {/* <FindThePath /> */}
         {/* <Project /> */}
-        <Accelerator />
-        <LearningOptions />
+        {/* <Accelerator /> */}
+        {/* <LearningOptions /> */}
         {/* <Testimonials /> */}
-      </Container>
-      <ContactForm />
+      {/* </Container> */}
+      {/* <ContactForm /> */}
     </>
   );
 }
