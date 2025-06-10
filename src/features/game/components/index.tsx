@@ -177,14 +177,14 @@ function Game() {
       content={
         <section className="flex flex-col items-center justify-items-center justify-center md:p-4 h-full">
           <div className="w-full h-full md:w-[58vw] xl:w-[45vw] 2xl:w-[1000px] md:h-[450px] flex flex-col justify-center items-center">
-            <div className="relative w-[80vw] h-[450px] md:w-[40vw] 2xl:w-[800px] md:h-[360px]">
+            <div className="relative w-[80vw] mt-10 md:mt-0 h-full md:w-[40vw] 2xl:w-[800px] md:h-[360px]">
               {!loading ? (
                 <div ref={sliderRef} className="keen-slider h-full">
                   {game?.map((item, i: number) => (
                     <div key={i} className="keen-slider__slide">
                       <div
                         style={scaleStyle(i)}
-                        className="flex items-center justify-center px-10 md:px-12 rounded-xl w-full h-full bg-white"
+                        className="flex items-center justify-center px-1 md:px-12 rounded-xl w-full h-full bg-white"
                       >
                         <div
                           className="relative w-full cursor-pointer"
@@ -200,7 +200,7 @@ function Game() {
                           }}
                         >
                           <div
-                            className="absolute inset-0 flex items-center justify-center px-8"
+                            className="absolute inset-0 flex items-center justify-center px-6"
                             style={{ backfaceVisibility: "hidden" }}
                           >
                             <div className="w-full max-w-[95%] overflow-hidden">
@@ -210,7 +210,7 @@ function Game() {
                             </div>
                           </div>
                           <div
-                            className="absolute inset-0 flex items-center justify-center px-8"
+                            className="absolute inset-0 flex items-center justify-center px-6"
                             style={{
                               backfaceVisibility: "hidden",
                               transform: "rotateY(180deg)",
