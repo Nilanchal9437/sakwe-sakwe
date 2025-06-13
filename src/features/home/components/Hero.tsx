@@ -45,15 +45,15 @@ const Hero = () => {
 
         {/* Main Content */}
         <div className="flex flex-col items-center justify-center z-20 mt-20">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mb-10">
             <span className="text-4xl md:text-6xl font-bold text-gray-900 bg-white p-4 rounded-xl text-center mb-2">
               Sakwe Sakwe
             </span>
           </div>
-          <p className="text-gray-800 text-base md:text-lg my-8 max-w-sm text-center">
+          {/* <p className="text-gray-800 text-base md:text-lg my-8 max-w-sm text-center">
             Online school for digital skills where kids aged 6-17 realize their
             dreams and turn them into real projects.
-          </p>
+          </p> */}
           <button
             onClick={() => router.push("/games")}
             className="flex items-center bg-white hover:bg-lime-200 text-gray-900 font-semibold px-8 py-3 rounded-xl shadow-md transition text-lg mx-auto"
