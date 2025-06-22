@@ -30,7 +30,7 @@ const useCreate = () => {
       if (response?.status) {
         toast.success(response.message, { position: "top-right" });
         setTimeout(() => {
-          // window.location.href = "/";
+          window.location.href = "/";
         }, 2000);
       } else {
         toast.warning(response.message, { position: "top-right" });
