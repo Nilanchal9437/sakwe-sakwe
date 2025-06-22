@@ -1,4 +1,4 @@
-import Axios from "@/lib/Axios";
+import Axios from "@/lib/axios";
 import { toast } from "react-toastify";
 import { useApi } from "@/hooks/useApi";
 

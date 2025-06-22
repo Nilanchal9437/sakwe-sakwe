@@ -1,4 +1,4 @@
-import Axios from "@/lib/Axios";
+import Axios from "@/lib/axios";
 import type { GameSubmitType } from "@/features/admin/game-submit/types";
 import { useApi } from "@/hooks/useApi";
 
