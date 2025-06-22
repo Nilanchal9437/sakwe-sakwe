@@ -15,6 +15,7 @@ function Modal({
   centerText,
   hideBtn,
   className,
+  submitBtn,
 }: ModalType) {
   if (!open) return null; // Hide modal when not open
 
@@ -51,6 +52,11 @@ function Modal({
           <div className="mt-4 overflow-y-auto max-h-[50vh]">{content}</div>
         )}
 
+        {submitBtn ? (
+          <div className="flex items-center"> 
+            {submitBtn}
+          </div>
+        ) : null}
         {/* Actions */}
         {hideBtn ? null : (
           <div className="flex gap-2 mt-6">

@@ -6,6 +6,19 @@ import Modal from "@/components/Modal";
 import React, { useState, useEffect } from "react";
 import { useKeenSlider, TrackDetails } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
+import useCreate from "@/features/game/apis/submit";
+import * as yup from "yup";
+import { Formik } from "formik";
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .trim()
+    .email("Please enter a valid email!")
+    .required("Please enter a email!"),
+  phone: yup.string().trim().required("Please enter a phone number!"),
+  name: yup.string().trim().required("Please enter a name!"),
+});
 
 function shuffleArray<T>(array: T[]): T[] {
   const shuffled = [...array]; // Copy to avoid mutating the original
@@ -34,6 +47,9 @@ function Game() {
   const [totalSessionTime, setTotalSessionTime] = useState<number>(0);
   const [cardDuration, setCardDuration] = useState<number>(0);
   const [direction, setDirection] = useState<"left" | "right" | null>(null);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const { create } = useCreate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,7 +115,9 @@ function Game() {
       }
       setGame([...game]);
     }
-  }, [direction]);
+  }, [currentSlide]);
+
+  console.log(game);
 
   useEffect(() => {
     const id = param.get("id");
@@ -157,104 +175,222 @@ function Game() {
   }
 
   return (
-    <Modal
-      className="w-full h-full bg-[#89e894] md:max-h-[90vh] xl:max-w-[1064px] 2xl:max-w-[1264px] md:w-fit md:h-fit md:max-w-[90vw] md:p-6"
-      hideBtn
-      title=""
-      secondaryText=""
-      open={true}
-      onClose={() => router.back()}
-      cancelButtonText="Cancel"
-      centerText={
-        <div className="relative">
-          <div className="absolute left-0 right-0 bg-white rounded-xl w-20 h-10 mx-auto">
-            <h1 className="text-center text-xl font-semibold py-1">
-              {formatTime(totalSessionTime)}
-            </h1>
+    <>
+      <Modal
+        className="w-full h-full bg-[#89e894] md:max-h-[90vh] xl:max-w-[1064px] 2xl:max-w-[1264px] md:w-fit md:h-fit md:max-w-[90vw] md:p-6"
+        hideBtn
+        title=""
+        secondaryText=""
+        open={true}
+        onClose={() => router.back()}
+        cancelButtonText="Cancel"
+        centerText={
+          <div className="relative">
+            <div className="absolute left-0 right-0 bg-white rounded-xl w-20 h-10 mx-auto">
+              <h1 className="text-center text-xl font-semibold py-1">
+                {formatTime(totalSessionTime)}
+              </h1>
+            </div>
           </div>
-        </div>
-      }
-      content={
-        <section className="flex flex-col items-center justify-items-center justify-center md:p-4 h-full">
-          <div className="w-full h-full md:w-[58vw] xl:w-[45vw] 2xl:w-[1000px] md:h-[450px] flex flex-col justify-center items-center">
-            <div className="relative w-[80vw] mt-10 md:mt-0 h-full md:w-[40vw] 2xl:w-[800px] md:h-[360px]">
-              {!loading ? (
-                <div ref={sliderRef} className="keen-slider h-full">
-                  {game?.map((item, i: number) => (
-                    <div key={i} className="keen-slider__slide">
-                      <div
-                        style={scaleStyle(i)}
-                        className="flex items-center justify-center px-1 md:px-12 rounded-xl w-full h-full bg-white"
-                      >
+        }
+        content={
+          <section className="flex flex-col items-center justify-items-center justify-center md:p-4 h-full">
+            <div className="w-full h-full md:w-[58vw] xl:w-[45vw] 2xl:w-[1000px] md:h-[450px] flex flex-col justify-center items-center">
+              <div className="relative w-[80vw] mt-10 md:mt-0 h-full md:w-[40vw] 2xl:w-[800px] md:h-[360px]">
+                {!loading ? (
+                  <div ref={sliderRef} className="keen-slider h-full">
+                    {game?.map((item, i: number) => (
+                      <div key={i} className="keen-slider__slide">
                         <div
-                          className="relative w-full cursor-pointer"
-                          onClick={() => handleFlip(i)}
-                          style={{
-                            transformStyle: "preserve-3d",
-                            transition:
-                              "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
-                            transform:
-                              flippedIndex === i
-                                ? "rotateY(180deg)"
-                                : "rotateY(0deg)",
-                          }}
+                          style={scaleStyle(i)}
+                          className="flex items-center justify-center px-1 md:px-12 rounded-xl w-full h-full bg-white"
                         >
                           <div
-                            className="absolute inset-0 flex items-center justify-center px-6"
-                            style={{ backfaceVisibility: "hidden" }}
-                          >
-                            <div className="w-full max-w-[95%] overflow-hidden">
-                              <h2 className="md:text-2xl xl:text-3xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
-                                {item.question}
-                              </h2>
-                            </div>
-                          </div>
-                          <div
-                            className="absolute inset-0 flex items-center justify-center px-6"
+                            className="relative w-full cursor-pointer"
+                            onClick={() => handleFlip(i)}
                             style={{
-                              backfaceVisibility: "hidden",
-                              transform: "rotateY(180deg)",
+                              transformStyle: "preserve-3d",
+                              transition:
+                                "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+                              transform:
+                                flippedIndex === i
+                                  ? "rotateY(180deg)"
+                                  : "rotateY(0deg)",
                             }}
                           >
-                            <div className="w-full max-w-[95%] overflow-hidden">
-                              <h2 className="md:text-2xl xl:text-3xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
-                                {item.answer}
-                              </h2>
+                            <div
+                              className="absolute inset-0 flex items-center justify-center px-6"
+                              style={{ backfaceVisibility: "hidden" }}
+                            >
+                              <div className="w-full max-w-[95%] overflow-hidden">
+                                <h2 className="md:text-2xl xl:text-3xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
+                                  {item.question}
+                                </h2>
+                              </div>
+                            </div>
+                            <div
+                              className="absolute inset-0 flex items-center justify-center px-6"
+                              style={{
+                                backfaceVisibility: "hidden",
+                                transform: "rotateY(180deg)",
+                              }}
+                            >
+                              <div className="w-full max-w-[95%] overflow-hidden">
+                                <h2 className="md:text-2xl xl:text-3xl font-semibold text-center break-words leading-relaxed whitespace-pre-wrap">
+                                  {item.answer}
+                                </h2>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  !loading && instanceRef?.current?.prev();
-                }}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 w-8 h-full bg-[#dadee6] text-white rounded flex items-center justify-center text-2xl hover:bg-[#c5ccd6] disabled:opacity-50 z-10 shadow-lg"
-                disabled={currentSlide === 0}
-              >
-                {"<"}
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  !loading && instanceRef?.current?.next();
-                }}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 w-8 h-full bg-[#dadee6] text-white rounded flex items-center justify-center text-2xl hover:bg-[#c5ccd6] disabled:opacity-50 z-10 shadow-lg"
-                disabled={currentSlide === (game?.length || 0) - 1}
-              >
-                {">"}
-              </button>
+                    ))}
+                  </div>
+                ) : null}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    !loading && instanceRef?.current?.prev();
+                  }}
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 w-8 h-full bg-[#dadee6] text-white rounded flex items-center justify-center text-2xl hover:bg-[#c5ccd6] disabled:opacity-50 z-10 shadow-lg"
+                  disabled={currentSlide === 0}
+                >
+                  {"<"}
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    !loading && instanceRef?.current?.next();
+                  }}
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 w-8 h-full bg-[#dadee6] text-white rounded flex items-center justify-center text-2xl hover:bg-[#c5ccd6] disabled:opacity-50 z-10 shadow-lg"
+                  disabled={currentSlide === (game?.length || 0) - 1}
+                >
+                  {">"}
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
-      }
-      onNext={() => {}}
-      nextButtonText="Add"
-    />
+          </section>
+        }
+        onNext={() => {}}
+        nextButtonText="Add"
+        submitBtn={
+          currentSlide === (game?.length || 0) - 1 ? (
+            <button
+              onClick={() => {
+                game[currentSlide].sessionTime = formatTime(cardDuration);
+                setGame([...game]);
+                setCardDuration(0);
+                setOpen(true);
+              }}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors w-[100px] mx-auto mt-5"
+            >
+              Submit
+            </button>
+          ) : null
+        }
+      />
+      {currentSlide === (game?.length || 0) - 1 ? (
+        <Modal
+          hideBtn
+          className="h-full md:h-fit bg-[#89e894] w-full md:w-fit p-6"
+          title=""
+          secondaryText=""
+          open={open}
+          onClose={() => setOpen(false)}
+          cancelButtonText="Cancel"
+          centerText={
+            <div className="relative">
+              <div className="absolute left-0 right-0 rounded-xl h-10 mx-auto">
+                <h1 className="text-center text-xl font-semibold py-1">
+                  USER DETAILS
+                </h1>
+              </div>
+            </div>
+          }
+          content={
+            <section className="flex flex-col items-center justify-items-center justify-center h-full">
+              <div className="w-full md:w-[400px] h-full p-2">
+                <Formik
+                  initialValues={{ email: "", name: "", phone: "" }}
+                  onSubmit={(values) => {
+                    create({
+                      answer: game,
+                      totalSessionTime: formatTime(totalSessionTime),
+                      game_id: param.get("id") ?? "",
+                      ...values,
+                    });
+                  }}
+                  validationSchema={schema}
+                >
+                  {(formik) => (
+                    <form onSubmit={formik.handleSubmit}>
+                      {/* Name Field */}
+                      <label className="block text-sm mt-4">Name</label>
+                      <input
+                        name="name"
+                        placeholder="Enter your name"
+                        className="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                      {formik.errors.name && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formik.errors.name}
+                        </p>
+                      )}
+
+                      {/* Email Field */}
+                      <label className="block text-sm mt-4">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        className="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                      {formik.errors.email && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formik.errors.email}
+                        </p>
+                      )}
+
+                      {/* Phone Field */}
+                      <label className="block text-sm mt-4">Phone Number</label>
+                      <input
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        className="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value={formik.values.phone}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                      {formik.errors.phone && (
+                        <p className="text-red-500 text-xs mt-1">
+                          {formik.errors.phone}
+                        </p>
+                      )}
+
+                      {/* Submit Button */}
+                      <button
+                        type="submit"
+                        className="w-full bg-green-600 text-white font-semibold py-3 rounded-md mt-6 hover:bg-green-700 transition"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  )}
+                </Formik>
+              </div>
+            </section>
+          }
+          onNext={() => {}}
+          nextButtonText="Add"
+        />
+      ) : null}
+    </>
   );
 }
 

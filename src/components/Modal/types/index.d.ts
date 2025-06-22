@@ -11,6 +11,7 @@ interface ModalType {
   centerText?: React.ReactNode;
   hideBtn?: boolean;
   className?: string;
+  submitBtn?: React.ReactNode;
 }
 
 export default ModalType;

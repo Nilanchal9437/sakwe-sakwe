@@ -494,7 +494,21 @@ const games = [
   //   icon: "/games/WhenTaken.png",
   //   bgColor: "#F3E8FF",
   //   imageShape: "circle",
-  //   questions: [],
+  //   questions: [
+  //     {
+  //       question: "What is the largest desert in Africa?",
+  //       answer: "Sahara Desert",
+  //     },
+  //     {
+  //       question: "Which river is the longest in Africa?",
+  //       answer: "Nile River",
+  //     },
+  //     {
+  //       question:
+  //         "Which African country is known as the Land of a Thousand Hills?",
+  //       answer: "Rwanda",
+  //     },
+  //   ],
   // },
   // {
   //   id: 4,
