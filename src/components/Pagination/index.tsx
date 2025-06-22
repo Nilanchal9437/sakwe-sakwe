@@ -15,7 +15,7 @@ const CustomPagination: React.FC<PaginationProps> = ({
 }) => {
   const totalPages = Math.ceil(total / limit);
 
-  return (
+  return total > 0 ? (
     <div className="flex justify-center space-x-2 mt-4">
       {/* Previous Button */}
       <button
@@ -61,7 +61,7 @@ const CustomPagination: React.FC<PaginationProps> = ({
         Next
       </button>
     </div>
-  );
+  ) : null;
 };
 
 export default CustomPagination;
