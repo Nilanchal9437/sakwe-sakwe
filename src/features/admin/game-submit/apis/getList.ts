@@ -26,7 +26,7 @@ const useList = () => {
         return { status: false, data: [], total: 0 };
       }
     } catch (err: any) {
-      console.log("error in getting submited game list fetching :: ", err);
+      console.error("error in getting submited game list fetching :: ", err);
       return { status: false, data: [], total: 0 };
     }
   };

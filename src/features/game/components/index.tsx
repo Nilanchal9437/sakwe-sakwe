@@ -117,8 +117,6 @@ function Game() {
     }
   }, [currentSlide]);
 
-  console.log(game);
-
   useEffect(() => {
     const id = param.get("id");
     if (id) {
@@ -312,13 +310,16 @@ function Game() {
               <div className="w-full md:w-[400px] h-full p-2">
                 <Formik
                   initialValues={{ email: "", name: "", phone: "" }}
-                  onSubmit={(values) => {
-                    create({
+                  onSubmit={async (values) => {
+                    const response = await create({
                       answer: game,
                       totalSessionTime: formatTime(totalSessionTime),
                       game_id: param.get("id") ?? "",
                       ...values,
                     });
+                    if (response?.status) {
+                      router.push(`/submited?id=${response?.data?._id}`);
+                    }
                   }}
                   validationSchema={schema}
                 >

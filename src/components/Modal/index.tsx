@@ -29,11 +29,11 @@ function Modal({
         })}
       >
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center p-6 lg:p-0">
           <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 p-6 lg:p-0"
+            className="text-gray-500 hover:text-gray-700"
           >
             <IoMdClose className="w-5 h-5" />
           </button>

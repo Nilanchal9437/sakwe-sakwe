@@ -28,18 +28,18 @@ const useCreate = () => {
       });
 
       if (response?.status) {
-        toast.success(response.message, { position: "top-right" });
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 2000);
+        toast.success(response.message, { position: "top-right" }); 
+        return { status: true, data: response?.data };
       } else {
         toast.warning(response.message, { position: "top-right" });
+        return { status: false, data: null };
       }
     } catch (err: any) {
-      console.log("error in submitting game:: ", err);
+      console.error("error in submitting game:: ", err);
       toast.error(err?.response ? err?.response?.data?.message : err?.message, {
         position: "top-right",
       });
+      return { status: false, data: null };
     }
   };
 
